@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <title>Tutor</title>
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <v-content>
+          <v-container fluid>
+            <h1>Images</h1>
+            <hr />
+            <v-row>
+              <v-col v-for="(item,$itemIndex) in items" cols="6" :key="$itemIndex" 
+              class="my-1 col-sm-4" @click.stop="openDialog($event, $itemIndex)" >
+                <v-card hover>
+                  <v-img :src="item.src"></v-img>
+                </v-card>
+              </v-col>
+
+              <v-dialog v-model="dialog" scrollable fullscreen>
+                  <v-card>
+                    <v-toolbar dense short max-height="50">
+                      <v-btn @click="currentItemIndex -= 1" v-show="hasPreviousItem">
+                        <v-icon>mdi-arrow-left-thick</v-icon>
+                      </v-btn>
+                      <v-spacer></v-spacer>
+                      <v-toolbar-title>Image {{currentItemIndex + 1}}</v-toolbar-title>
+                      <v-spacer></v-spacer>
+                        <v-btn  @click="currentItemIndex += 1" v-show="hasNextItem">
+                          <v-icon>mdi-arrow-right-thick</v-icon></v-btn>
+                    </v-toolbar>
+                          <div class="my-auto">
+                      <v-img :src="items[currentItemIndex]"></v-img>
+</div>
+                    <v-divider></v-divider>
+                      <v-btn @click="dialog = false" class=" grey lighten-3">
+                        <v-icon>mdi-close-outline</v-icon>
+                      </v-btn>
+                  </v-card>
+                </v-dialog>
+              </template>
+            </v-row>
+          </v-container>
+        </v-content>
+      </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+      const NUM_OF_IMAGES = 15;
+      new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+        data: {
+          items: [],
+          total_items: NUM_OF_IMAGES,
+          dialog: false,
+          currentItemIndex: 0
+        },
+        computed: {
+          hasNextItem() {
+            return this.currentItemIndex + 1 < this.total_items
+          },
+          hasPreviousItem() {
+            return this.currentItemIndex > 0 
+          }
+        },
+        methods: {
+          openDialog(event, index) {
+            this.currentItemIndex = index
+            this.dialog = true
+          }
+        },
+        created() {
+          for (let i = 1; i <= this.total_items; i++) {
+            this.items.push({ src: `./images/${i}.png` });
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
