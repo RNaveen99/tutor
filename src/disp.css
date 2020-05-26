@@ -1,0 +1,17 @@
+.vnav li {
+    text-transform: capitalize;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 1px solid transparent;
+}
+.vnav a{ 
+    display: block;
+    text-decoration: none;
+    color:#cc2429;
+    font-size: 1.6em;
+}
+.vnav li:hover {
+    background-color:#ed9a9d;
+    border: 1px solid gray;
+
+}

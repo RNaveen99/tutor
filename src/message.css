@@ -1,0 +1,46 @@
+body {
+    display:flex;
+    flex-flow: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1 0 auto;
+}
+.page-footer .container {
+    padding-bottom: 10px;
+}
+.green-msg {
+    background-color:lightgreen;
+    position:absolute;
+    left:0;
+    right:0;
+    opacity:0;
+    height:5vh;
+    animation: anim 2s 1 ease-in-out backwards;
+    font-weight: bolder;
+    text-transform: uppercase;
+    padding-top:5px;
+}
+.red-msg {
+    background-color:red;
+    position:absolute;
+    left:0;
+    right:0;
+    opacity:0;
+    //height:5vh;
+    animation: anim 5s 1 ease-in-out backwards;
+    font-weight: bolder;
+    text-transform: capitalize;
+    padding-top: 5px;
+}
+@keyframes anim {
+    0% {
+        opacity:0;
+    }
+    10%, 90% {
+        opacity:1;
+    }
+    100% {
+        opacity:0;
+    }
+}
